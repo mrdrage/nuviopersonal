@@ -1,20 +1,19 @@
 /**
  * Diagnostic Nuvio provider for Eclipse.
  *
- * It intentionally returns the same public Apple HLS test stream for every
- * movie/TV request. Its only purpose is to verify that the repository,
- * manifest, JavaScript runtime and Eclipse player are wired correctly.
+ * Returns a small public-domain MP4 test video for every request.
+ * This isolates the Eclipse/Nuvio playback pipeline from HLS-specific issues.
  */
 async function getStreams(tmdbId, mediaType, season, episode) {
   return [
     {
-      title: "Eclipse Demo • Apple HLS",
+      title: "Eclipse Demo • MP4 480p",
       name: "Demo Source",
-      url: "https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_ts/master.m3u8",
-      quality: "HLS",
+      url: "https://cdn.truefilesize.com/mp4/sample-1mb.mp4",
+      quality: "480p",
       language: "en",
       provider: "mrdrage-demo",
-      type: "hls"
+      type: "mp4"
     }
   ];
 }
