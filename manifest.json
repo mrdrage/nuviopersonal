@@ -1,6 +1,6 @@
 {
   "name": "mrdrage Nuvio Personal",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Personal Nuvio provider repository for Eclipse",
   "author": "mrdrage",
   "scrapers": [
@@ -16,6 +16,20 @@
       "hasSettings": false,
       "formats": ["mp4"],
       "contentLanguage": ["en"]
+    },
+    {
+      "id": "animesaturn-catalog",
+      "name": "AnimeSaturn Catalog",
+      "description": "Matches TMDB titles and episodes against the AnimeSaturn public catalog. Playback is a harmless demo clip; no AnimeSaturn player or host stream is resolved.",
+      "version": "0.1.0",
+      "author": "mrdrage",
+      "supportedTypes": ["movie", "tv"],
+      "filename": "providers/animesaturn-catalog.js",
+      "enabled": true,
+      "hasSettings": false,
+      "formats": ["mp4"],
+      "contentLanguage": ["it", "ja"],
+      "limited": true
     }
   ]
 }
