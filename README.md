@@ -2,6 +2,38 @@
 
 Personal Nuvio provider repository designed for Eclipse.
 
+## Install in Eclipse
+
+Add this repository URL:
+
+```text
+https://raw.githubusercontent.com/mrdrage/nuviopersonal/main/manifest.json
+```
+
+## Providers
+
+### Eclipse Demo Source
+
+A diagnostic provider that returns a small public MP4 test clip for every request. It verifies the complete chain:
+
+```text
+GitHub manifest -> provider JS -> Nuvio runtime -> Eclipse streams -> player
+```
+
+### AnimeSaturn Catalog
+
+A catalog-only matcher. It:
+
+1. receives the TMDB ID from Eclipse;
+2. resolves a title through public metadata;
+3. searches the public AnimeSaturn catalog;
+4. chooses the best matching title/season;
+5. verifies that the requested episode is listed on the anime page.
+
+When a catalog match is confirmed, Eclipse shows a result named `AnimeSaturn catalog ✓ ...` and plays the same harmless public MP4 test clip used for diagnostics.
+
+It deliberately does **not** resolve AnimeSaturn players, iframe hosts, `.m3u8` URLs or third-party video streams.
+
 ## Structure
 
 ```text
@@ -11,28 +43,13 @@ nuviopersonal/
 ├── .gitignore
 └── providers/
     ├── demo.js
+    ├── animesaturn-catalog.js
     └── template.js
 ```
 
-## Install in Eclipse
+## Provider interface
 
-Add this repository URL:
-
-```text
-https://raw.githubusercontent.com/mrdrage/nuviopersonal/main/manifest.json
-```
-
-Enable `Eclipse Demo Source`, open any movie or TV title and request sources. The demo provider deliberately returns the same public Apple HLS test stream for every title so the full chain can be verified:
-
-```text
-GitHub manifest -> provider JS -> Nuvio runtime -> Eclipse streams -> player
-```
-
-Remove or disable the demo provider after testing.
-
-## Adding a provider
-
-Create a file in `providers/`, for example `providers/my-source.js`, exporting:
+Eclipse calls:
 
 ```js
 async function getStreams(tmdbId, mediaType, season, episode) {
@@ -42,24 +59,4 @@ async function getStreams(tmdbId, mediaType, season, episode) {
 module.exports = { getStreams };
 ```
 
-Then add a matching scraper entry to `manifest.json` whose `filename` points to that file.
-
-## Stream result shape
-
-Eclipse can consume objects shaped like:
-
-```js
-{
-  title: "1080p ITA",
-  name: "My Source",
-  url: "https://example.com/authorized/master.m3u8",
-  quality: "1080p",
-  language: "it",
-  provider: "my-provider",
-  type: "hls",
-  headers: {},
-  subtitles: []
-}
-```
-
-Use only sources you are authorized to access and expose through the provider.
+A normal authorized stream result can use fields such as `title`, `name`, `url`, `quality`, `language`, `provider`, `type`, `headers` and `subtitles`.
