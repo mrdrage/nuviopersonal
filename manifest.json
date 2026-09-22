@@ -1,0 +1,21 @@
+{
+  "name": "mrdrage Nuvio Personal",
+  "version": "1.0.0",
+  "description": "Personal Nuvio provider repository for Eclipse",
+  "author": "mrdrage",
+  "scrapers": [
+    {
+      "id": "mrdrage-demo",
+      "name": "Eclipse Demo Source",
+      "description": "Diagnostic source using a public Apple HLS test stream",
+      "version": "1.0.0",
+      "author": "mrdrage",
+      "supportedTypes": ["movie", "tv"],
+      "filename": "providers/demo.js",
+      "enabled": true,
+      "hasSettings": false,
+      "formats": ["m3u8"],
+      "contentLanguage": ["en"]
+    }
+  ]
+}
